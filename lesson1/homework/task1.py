@@ -13,10 +13,9 @@ a = int(input("Введите трехзначное число: "))
 
 if a < 100 or a > 999:
     print("Вы ввели не трехзначное число")
-    exit()
+else:
+    a3 = int(a % 10)
+    a2 = int(a / 10 % 10)
+    a1 = int(a / 100)
 
-a3 = int(a % 10)
-a2 = int(a / 10 % 10)
-a1 = int(a / 100)
-
-print(a1 + a2 + a3)
+    print(a1 + a2 + a3)
