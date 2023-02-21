@@ -14,7 +14,7 @@ for i in range(n):
     if coin:
         eagle = eagle + 1
     else:
-        tails = tailso + 1
+        tails = tails + 1
 
 if eagle > tails:
     print(tails)
