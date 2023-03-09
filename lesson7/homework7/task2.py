@@ -15,15 +15,9 @@
 
 def print_operation_table(operation, num_rows=6, num_columns=6):
     for row in range(1, num_rows + 1):
-        print(row, end="")
-
-        if row == 1:
-            for col in range(2, num_columns + 1):
-                print(f"\t{col}", end="")
-        else:
-            for col in range(2, num_columns + 1):
-                result = operation(col, row)
-                print(f"\t{result}", end="")
+        for col in range(1, num_columns + 1):
+            result = operation(col, row)
+            print(f"{result:5}", end="")
         
         print()
 
