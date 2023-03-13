@@ -12,25 +12,41 @@
 import os
 
 phone_book_filename = 'phonebook.txt'
-phone_book = dict()
 
-def read_phone_book(path, book):
-    with os.open(path, 'r') as line:
-        record = line.split()
+def read_phone_book(path):
+    book = []
 
-        if (record.length > 1):
-            book[' '.join(record[0:-1])] = record[-1]
+    with open(path, 'r', encoding='utf-8') as file:
+        for line in file:
+            record = line.split()
+
+            if (len(record) < 2):
+                continue
+            
+            book.append({
+                'name': ' '.join(record[0:-1]),
+                'phone': record[-1]
+            })
+
+    return book
 
 
 def write_phone_book(path, book):
-    os.remove(path)
+    if (os.path.exists(path)):
+        os.remove(path)
 
-    with os.open(path, 'w') as file:
-        for name in book:
-            phone = book[name]
+    with open(path, 'w', encoding='utf-8') as file:
+        for record in book:
+            name = record['name']
+            phone = record['phone']
             file.write(f'{name} {phone}\n')
 
 
 def search(book, search_str):
     for name in book:
         name_string = f'{name} {book[name]}'
+
+
+phone_book = read_phone_book(phone_book_filename)
+
+print(phone_book)
