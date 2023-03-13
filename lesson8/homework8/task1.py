@@ -24,6 +24,7 @@ def read_phone_book(path):
                 continue
             
             book.append({
+                'id': len(book) + 1,
                 'name': ' '.join(record[0:-1]),
                 'phone': record[-1]
             })
@@ -41,12 +42,37 @@ def write_phone_book(path, book):
             phone = record['phone']
             file.write(f'{name} {phone}\n')
 
+def print_book(book):
+    for id, rec in enumerate(book):
+        print(f'{rec["id"]}. {rec["name"]} {rec["phone"]}')
 
-def search(book, search_str):
-    for name in book:
-        name_string = f'{name} {book[name]}'
+
+def search(book, text):
+    return filter(lambda rec: text in rec['name'] or text in rec['phone'], book)
+
+def main_menu():
+    selected = input('''
+Main menu:
+0. Exit
+1. Show all
+2. Search
+
+Select action: ''')
+
+    match selected:
+        case '1':
+            print_book(read_phone_book(phone_book_filename))
+
+        case '2':
+            text = input('Search text: ')
+            book = read_phone_book(phone_book_filename)
+            print_book(search(book, text))
+
+        case '0':
+            exit(0)
+
+    input()
 
 
-phone_book = read_phone_book(phone_book_filename)
-
-print(phone_book)
+while True:
+    main_menu()
